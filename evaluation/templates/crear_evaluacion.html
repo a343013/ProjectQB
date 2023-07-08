@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Crear Evaluación</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <h1>Crear Evaluación</h1>
+    <form action="{% url 'crear_evaluacion' %}" method="POST">
+        {% csrf_token %}
+
+        <label for="agente">Agente:</label>
+        <select id="agente" name="agente">
+            {% for agente in agentes %}
+                <option value="{{ agente.id }}">{{ agente.nombre }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="inspector">Inspector:</label>
+        <select id="inspector" name="inspector">
+            {% for inspector in inspectores %}
+                <option value="{{ inspector.id }}">{{ inspector.nombre }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="fecha">Fecha de Evaluación:</label>
+        <input type="date" id="fecha" name="fecha">
+        <br>
+        <label for="interaccion">Interacción:</label>
+        <textarea id="interaccion" name="interaccion"></textarea>
+        <br>
+        <label for="pregunta1">¿El agente se presentó de acuerdo al proceso?</label>
+        <input type="radio" id="pregunta1_si" name="pregunta1" value="si">
+        <label for="pregunta1_si">Sí</label>
+        <input type="radio" id="pregunta1_no" name="pregunta1" value="no">
+        <label for="pregunta1_no">No</label>
+        <br>
+        <label for="pregunta2">¿El agente identificó el problema raíz?</label>
+        <input type="radio" id="pregunta2_si" name="pregunta2" value="si">
+        <label for="pregunta2_si">Sí</label>
+        <input type="radio" id="pregunta2_no" name="pregunta2" value="no">
+        <label for="pregunta2_no">No</label>
+        <br>
+        <label for="pregunta3">¿El agente dio solución al problema del cliente?</label>
+        <input type="radio" id="pregunta3_si" name="pregunta3" value="si">
+        <label for="pregunta3_si">Sí</label>
+        <input type="radio" id="pregunta3_no" name="pregunta3" value="no">
+        <label for="pregunta3_no">No</label>
+        <br>
+        <label for="pregunta4">¿El agente registró toda la información necesaria sobre el caso?</label>
+        <input type="radio" id="pregunta4_si" name="pregunta4" value="si">
+        <label for="pregunta4_si">Sí</label>
+        <input type="radio" id="pregunta4_no" name="pregunta4" value="no">
+        <label for="pregunta4_no">No</label>
+        <br>
+        <label for="pregunta5">¿El agente se despidió conforme al proceso?</label>
+        <input type="radio" id="pregunta5_si" name="pregunta5" value="si">
+        <label for="pregunta5_si">Sí</label>
+        <input type="radio" id="pregunta5_no" name="pregunta5" value="no">
+        <label for="pregunta5_no">No</label>
+        <br>
+        <input type="hidden" id="puntaje" name="puntaje">  <!-- Campo oculto para el puntaje -->
+        <input type="submit" value="Registrar Evaluación">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
+
+    <script>
+        // Función para calcular el puntaje automáticamente
+        function calcularPuntaje() {
+            var puntajeTotal = 0;
+            // Obtener el valor de cada pregunta y sumarlos
+            for (var i = 1; i <= 5; i++) {
+                var pregunta = $('input[name=pregunta' + i + ']:checked').val();
+                if (pregunta === 'si') {
+                    puntajeTotal += 1;
+                }
+            }
+            // Asignar el puntaje total al campo oculto 'puntaje'
+            $('#puntaje').val(puntajeTotal);
+        }
+
+        // Agregar evento onchange a las opciones de las preguntas
+        $('input[type=radio]').change(function() {
+            calcularPuntaje();
+        });
+    </script>
+    <a href="{% url 'index' %}" class="btn btn-primary">Ir a Inicio</a>
+</body>
+</html>

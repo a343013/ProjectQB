@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Consultar</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+     <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <h1>Consultar</h1>
+
+    <!-- Agrega un formulario para elegir la opción de consulta -->
+    <form action="/consultar" method="get">
+        <label for="consulta">Selecciona lo que deseas consultar:</label>
+        <select name="consulta" id="consulta">
+            <option value="agentes">Agentes</option>
+            <option value="inspectores">Inspectores</option>
+            <option value="evaluaciones">Evaluaciones</option>
+        </select>
+        <input type="submit" value="Consultar">
+    </form>
+
+    {% if consulta == 'agentes' %}
+        <h2>Agente</h2>
+        <!-- Tabla para mostrar información de los Agentes -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Equipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for agente in agentes %}
+                <tr>
+                    <td>{{ agente.nombre }}</td>
+                    <td>{{ agente.equipo }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif consulta == 'inspectores' %}
+        <h2>Inspector</h2>
+        <!-- Tabla para mostrar información de los Inspectores -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inspector in inspectores %}
+                <tr>
+                    <td>{{ inspector.nombre }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif consulta == 'evaluaciones' %}
+        <h2>Evaluación</h2>
+        <!-- Tabla para mostrar información de las Evaluaciones -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Agente</th>
+                    <th>Puntaje</th>
+                    <th>Fecha</th>
+                    <th>Interacción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evaluacion in evaluaciones %}
+                <tr>
+                    <td>{{ evaluacion.agente.nombre }}</td>
+                    <td>{{ evaluacion.puntaje }}</td>
+                    <td>{{ evaluacion.fecha }}</td>
+                    <td>{{ evaluacion.interaccion }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+<a href="{% url 'index' %}" class="btn btn-primary">Ir a Inicio</a>
+</body>
+</html>

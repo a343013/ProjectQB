@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Modificar</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <h1>Modificar</h1>
+    <h2>Agente</h2>
+    <!-- Tabla para mostrar información de los Agentes y opciones para editar o eliminar -->
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Equipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for agente in agentes %}
+            <tr>
+                <td>{{ agente.nombre }}</td>
+                <td>{{ agente.equipo }}</td>
+                <td>
+                    <a href="{% url 'editar_agente' agente.id %}">Editar</a>
+                    <a href="{% url 'eliminar_agente' agente.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Inspector</h2>
+    <!-- Tabla para mostrar información de los Inspectores y opciones para editar o eliminar -->
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inspector in inspectores %}
+            <tr>
+                <td>{{ inspector.nombre }}</td>
+                <td>
+                    <a href="{% url 'editar_inspector' inspector.id %}">Editar</a>
+                    <a href="{% url 'eliminar_inspector' inspector.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Evaluación</h2>
+    <!-- Tabla para mostrar información de las Evaluaciones y opciones para editar o eliminar -->
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Interacción</th>
+                <th>Puntaje</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evaluacion in evaluaciones %}
+            <tr>
+                <td>{{ evaluacion.fecha }}</td>
+                <td>{{ evaluacion.interaccion }}</td>
+                <td>{{ evaluacion.puntaje }}</td>
+                <td>
+                    <a href="{% url 'editar_evaluacion' evaluacion.id %}">Editar</a>
+                    <a href="{% url 'eliminar_evaluacion' evaluacion.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<a href="{% url 'index' %}" class="btn btn-primary">Ir a Inicio</a>
+</body>
+</html>
