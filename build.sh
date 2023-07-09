@@ -4,6 +4,7 @@ set -o errexit  # exit on error
 
 pip install --upgrade pip
 poetry install
+poetry self update
 
 pip install -r requirements.txt
 
