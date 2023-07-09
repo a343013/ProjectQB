@@ -1,0 +1,28 @@
+{
+  "build": {
+    "env": {
+      "USE_PYTHON_3_10": true
+    },
+    "steps": [
+      "install",
+      "build"
+    ]
+  },
+  "env": {
+    "MAX_LAMBDA_SIZE": "15mb"
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/QualityBeacon/wsgi.py"
+    }
+  ],
+  "requirements": {
+    "install": [
+      {"package": "asgiref", "version": "3.7.2"},
+      {"package": "Django", "version": "4.2.2"},
+      {"package": "sqlparse", "version": "0.4.4"},
+      {"package": "tzdata", "version": "2023.3"}
+    ]
+  }
+}
