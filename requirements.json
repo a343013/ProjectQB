@@ -1,5 +1,4 @@
-{
-  "build": {
+{  "build": {
     "env": {
       "USE_PYTHON_3_10": true
     },
@@ -23,6 +22,4 @@
       {"package": "Django", "version": "4.2.2"},
       {"package": "sqlparse", "version": "0.4.4"},
       {"package": "tzdata", "version": "2023.3"}
-    ]
-  }
-}
+    ]}}
