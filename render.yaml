@@ -1,7 +1,7 @@
 databases:
   - name: QualityBeacon
-    databaseName: QualityBeacon
-    user: QualityBeacon
+    databaseName: "QualityBeacon"
+    user: "QualityBeacon"
 
 services:
   - type: web
