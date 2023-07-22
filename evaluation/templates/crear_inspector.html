@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}Crear Agente{% endblock %}
 {% load static %}
+{% block content %}
 <html>
 <head>
     <title>Crear Inspector</title>
@@ -14,5 +17,6 @@
         <input type="submit" value="Registrar Inspector">
     </form>
 <a href="{% url 'index' %}" class="btn btn-primary">Ir a Inicio</a>
+{% endblock %}
 </body>
 </html>
