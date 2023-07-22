@@ -1,6 +1,8 @@
-
 <!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}Crear Agente{% endblock %}
 {% load static %}
+{% block content %}
 <html>
 <head>
     <title>Registrar</title>
@@ -17,5 +19,6 @@
         <li><a href="{% url 'crear_evaluacion' %}">Evaluación</a></li>
     </ul>
 <a href="{% url 'index' %}" class="btn btn-primary">Ir a Inicio</a>
+{% endblock %}
 </body>
 </html>
